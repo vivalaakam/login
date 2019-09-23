@@ -27,20 +27,6 @@ target 'login' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'loginTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
   use_native_modules!
 end
 
-target 'login-tvOS' do
-  # Pods for login-tvOS
-
-  target 'login-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end

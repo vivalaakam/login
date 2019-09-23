@@ -3,9 +3,9 @@
  *
  * @flow
  */
-import React from 'react';
+import React from 'react'
 
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native'
 
 const styles = StyleSheet.create({
   root: {
@@ -20,19 +20,24 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderRadius: 7,
     borderWidth: 1,
+    marginLeft: 25,
     borderColor: 'rgba(221,221,221,0.8)',
-    transform: [{ translateX: 25 }],
-    paddingLeft: 10,
-    paddingRight: 35,
+    paddingHorizontal: 10,
+    borderTopLeftRadius: 7,
+    borderBottomLeftRadius: 7,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0
   },
   last: {
-    transform: [{ translateX: -25 }],
-    paddingLeft: 35,
-    paddingRight: 10,
+    marginLeft: 0,
+    marginRight: 25,
+    borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0
   },
-});
+})
 
 export default function Input({ label, value, onChange, isLast, secureTextEntry }) {
   return (
@@ -45,5 +50,5 @@ export default function Input({ label, value, onChange, isLast, secureTextEntry 
         secureTextEntry={secureTextEntry}
       />
     </View>
-  );
+  )
 }

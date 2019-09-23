@@ -3,28 +3,41 @@
  *
  * @flow
  */
-import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 const styles = StyleSheet.create({
   text: {
     backgroundColor: 'rgb(246,208,0)',
-    borderRadius: 7,
-    fontWeight: '600',
-    textAlign: 'center',
-    textTransform: 'uppercase',
+
     padding: 10,
-    transform: [{ translateX: 25 }],
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 7,
+    borderBottomLeftRadius: 7,
+    marginLeft: 25,
+
   },
   last: {
-    transform: [{ translateX: -25 }],
+    marginLeft: 0,
+    marginRight: 25,
+    borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0
   },
-});
+})
 
 export default function Button({ children, onPress, style, isLast }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <Text style={[styles.text, style, isLast ? styles.last : null]}>{children}</Text>
+      <View style={[styles.text, style, isLast ? styles.last : null]}>
+        <Text style={{
+          fontWeight: '600',
+          textAlign: 'center',
+          textTransform: 'uppercase',
+        }}>{children}</Text>
+      </View>
     </TouchableWithoutFeedback>
-  );
+  )
 }
