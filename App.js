@@ -4,7 +4,7 @@
  */
 
 import React, { useCallback, useRef } from 'react'
-import { Animated, Dimensions, SafeAreaView, StyleSheet, View } from 'react-native'
+import { Animated, Dimensions, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, View } from 'react-native'
 import TabButton from './js/TabButton'
 import Title from './js/Title'
 import Login from './js/Login'
@@ -52,6 +52,12 @@ const styles = StyleSheet.create({
     height
   }
 })
+const behavior = Platform.select({
+  ios: {
+    behavior: 'padding'
+  },
+  android: {}
+})
 
 export default function App() {
   const position = useRef(new Animated.Value(0))
@@ -71,18 +77,21 @@ export default function App() {
 
   return (
     <>
-      <Animated.Image style={[styles.back, {
-        transform: [{
-          translateX: position.current.interpolate({
-            inputRange: [0, width],
-            outputRange: [0, (height - width) * -1],
-            extrapolate: 'clamp'
-          })
-        }]
-      }]}
-                      source={{ uri: 'back' }} />
+      <Animated.Image
+        style={[styles.back, {
+          transform: [{
+            translateX: position.current.interpolate({
+              inputRange: [0, width],
+              outputRange: [0, (height - width) * -1],
+              extrapolate: 'clamp'
+            })
+          }]
+        }]}
+        source={{ uri: 'back' }}
+      />
       <Animated.ScrollView
         horizontal
+        pagingEnabled
         bounces={false}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollView}
@@ -91,7 +100,7 @@ export default function App() {
           { nativeEvent: { contentOffset: { x: position.current } } },
         ], { useNativeDriver: true })}
       >
-        <View style={styles.wrapper}>
+        <KeyboardAvoidingView {...behavior} enabled style={styles.wrapper}>
           <View style={styles.title}>
             <Title>Login to continue...</Title>
             <Title>Registration</Title>
@@ -101,7 +110,7 @@ export default function App() {
             <Login />
             <Register />
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Animated.ScrollView>
       <View style={styles.bottom}>
         <SafeAreaView style={{ flexDirection: 'row' }}>
